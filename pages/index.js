@@ -5,60 +5,54 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Grønsager i sæson</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <h1 className={styles.title}>FRUGT & GRØNT I SÆSON</h1>
+        <p className={styles.description}>Se hvonår danske frugt og grønt er i sæson 🥦</p>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+        <div className={styles.content}>
+          <h2>Januar</h2>
+          <p>Grønkål, gulerødder, hvidkål, Jordskokker, kartofler, kinakål, løg, pastinakker, persillerod, porrer, rosenkål, rødbeder, rødkål, selleri</p>
+               
+          <h2>Februar</h2>
+          <p>Grønkål, gulerødder, hvidkål, jordskokker, kartofler, løg, pastinakker, persillerod, porrer, rosenkål, rødbeder, rødkål, selleri</p>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+          <h2>Marts</h2>
+          <p>Agurk, feldsalat, grønkål, gulerødder, hvidkål, jordskokker, kartofler, løg, pastinakker, persillerod, porrer, purløg, rosenkål, rødbeder, rødkål, selleri, tomater, østershatte</p>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+          <h2>April</h2>
+          <p>Agurk, gulerødder, hvidkål, jordskokker, kartofler, løg, persille, porrer, rabarber, radiser, ramsløg, rosenkål, rødbeder, salat, selleri, spinat, tomater, østershatte</p>
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+          <h2>Maj</h2>
+          <p>Agurk, forårsløg, persille, rabarber, radiser, salat, spinat, tomater</p>
 
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          <h2>Juni</h2>
+          <p>Agurk, asparges, bladbeder, blomkål, broccoli, gulerødder, jordbær, kartofler, kinakål, løg, persille, radiser, salat, spidskål, spinat, tomater, ærter</p>
+
+          <h2>Juli</h2>
+          <p>Agurk, bladbeder, blomkål, broccoli, bær, gulerødder, hindbær, jordbær, jordskokker, kartofler, kinakål, kirsebær, løg, persille, rabarber, radiser, salat, spidskål, squash, tomater, ærter</p>
+
+          <h2>August</h2>
+          <p>Agurk, asier, bladbeder, bladselleri, blomkål, blommer, broccoli, bær, bønner, gulerødder, hindbær, hvidkål, jordskokker, kartofler, kinakål, løg, majs, persille, porrer, pærer, rabarber, radiser, rødbeder, rødkål, salat, spidskål, spinat, squash, tomater, vindruer, æbler, ærter</p>
+          
+          <h2>September</h2>
+          <p>Agurk, asier, bladbeder, bladselleri, blomkål, blommer, broccoli, bønner, grønkål, gulerødder, hvidkål, jordskokker, kartofler, kinakål, løg, majs, pastinakker, persille, persillerod, porrer, pærer, radiser, rosenkål, rødbeder, rødkål, salat, selleri, spinat, squash, tomater, vindruer, æbler</p>
+          
+          <h2>Oktober</h2>
+          <p>Agurk, asier, bladbeder, bladselleri, blomkål, broccoli, grønkål, gulerødder, hvidkål, jordskokker, kartofler, kinakål, løg, majs, pastinakker, persille, persillerod, porrer, pærer, radiser, rosenkål, rødbeder, rødkål, salat, selleri, spidskål, spinat, squash, tomater, valnødder, vindruer, æbler</p>
+
+          <h2>November</h2>
+          <p>Blomkål, græskar, grønkål, gulerødder, hvidkål, jordskokker, kartofler, kinakål, løg, pastinakker, persillerod, porrer, pærer, rosenkål, rødbeder, rødkål, salat, selleri, tomater, æbler</p>
+          
+          <h2>December</h2>
+          <p>Blomkål, grønkål, gulerødder, hvidkål, jordskokker, kartofler, kinakål, løg, pastinakker, persillerod, porrer, pærer, rosenkål, rødbeder, rødkål, selleri, æbler</p>
         </div>
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
       </footer>
     </div>
   )
