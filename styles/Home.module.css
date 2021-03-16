@@ -44,4 +44,14 @@
 
 .content {
   max-width: 800px;
+  padding: 0;
+}
+
+.content h2 {
+  font-weight: normal;
+}
+
+.content .active {
+  color: green;
+  font-weight: bold;
 }
