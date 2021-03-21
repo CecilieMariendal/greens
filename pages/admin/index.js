@@ -1,4 +1,4 @@
-import {Button, Grid, Form} from 'semantic-ui-react'
+import {Button, Grid, Form, List} from 'semantic-ui-react'
 import Head from 'next/head'
 import Link from 'next/link'
 import {useState} from 'react'
@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import kebabCase from 'lodash.kebabcase';
 import styles from '@styles/Admin.module.css'
 import {firestore, docToJson} from '@lib/firebase'
+
 
 export async function getServerSideProps() {
     const query = firestore.collection('vegetables');
@@ -19,19 +20,16 @@ export async function getServerSideProps() {
   
 
 export default function Admin({vegetables}) {
-    
-    const List = vegetables.map((vegetable) => {
+
+    const ListItem = vegetables.map((vegetable) => {
         return (
-            <li key={vegetable.id}>
+            <List.Item key={vegetable.id}>
                 <Link href={`/admin/${vegetable.id}`}>
                     {vegetable.name}
                 </Link>
-            </li>
+            </List.Item>
         )
     });
-
-
-    
 
     return (
         <div className={styles.container}>
@@ -40,10 +38,22 @@ export default function Admin({vegetables}) {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <h1>Admin</h1>
-            <CreateForm/>
+            <Grid>
+                <Grid.Row columns={2}>
+                    <Grid.Column>
+                        <CreateForm/>
+                    </Grid.Column>
+                    <Grid.Column>
+                        <List floated="right" divided>
+                            {ListItem}
+                        </List>
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
         </div>
     )
 }
+
 
 function CreateForm() {
     const [name, setName] = useState('');
@@ -82,14 +92,15 @@ function CreateForm() {
 
     return (
         <Form onSubmit={submitForm}>
+            <h2>Create</h2>
             <Grid>
                 <Grid.Row columns={1}>
                     <Grid.Column>
-                    <Form.Field>
-                        <label>Name</label>
-                        <Form.Input placeholder='Name' value={name} onChange={changeName} />
-                        <p>Slug: {slug}</p>
-                    </Form.Field>
+                        <Form.Field>
+                            <label>Name</label>
+                            <Form.Input placeholder='Name' value={name} onChange={changeName} />
+                            <p>Slug: {slug}</p>
+                        </Form.Field>
                     </Grid.Column>
                 </Grid.Row>
 
