@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import styles from '../../styles/Admin.module.css'
-import {firestore, docToJson} from '../../lib/firebase'
+import styles from '@styles/Admin.module.css'
+import {firestore, docToJson} from '@lib/firebase'
 
 export async function getServerSideProps({params}) {
     const query = firestore.collection('vegetables').doc(params.id);

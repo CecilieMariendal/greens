@@ -3,8 +3,8 @@ import Head from 'next/head'
 import Link from 'next/link'
 import {useState} from 'react'
 import kebabCase from 'lodash.kebabcase';
-import styles from '../../styles/Admin.module.css'
-import {firestore, docToJson} from '../../lib/firebase'
+import styles from '@styles/Admin.module.css'
+import {firestore, docToJson} from '@lib/firebase'
 
 export async function getServerSideProps() {
     const query = firestore.collection('vegetables');
