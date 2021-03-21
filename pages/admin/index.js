@@ -2,6 +2,7 @@ import {Button, Grid, Form} from 'semantic-ui-react'
 import Head from 'next/head'
 import Link from 'next/link'
 import {useState} from 'react'
+import toast from 'react-hot-toast';
 import kebabCase from 'lodash.kebabcase';
 import styles from '@styles/Admin.module.css'
 import {firestore, docToJson} from '@lib/firebase'
@@ -76,6 +77,7 @@ function CreateForm() {
         await ref.set(data);
 
         // toast.success('Post created!');
+        toast.success('Post created!');
     }
 
     return (
