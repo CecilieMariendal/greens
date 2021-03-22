@@ -65,15 +65,17 @@ function CreateForm() {
         setSlug(encodeURI(kebabCase(value)));
     }
 
-    const changemonth = (_, value) => {
+    const changemonth = (_, {value}) => {
         const index = months.indexOf(value);
-
         const newArray = [...months];
-        newArray.splice(index, 1)
         
-        if (index > -1) {
-            setMonths(newArray);
+        if (index !== -1) {
+            newArray.splice(index, 1)
+        } else {
+            newArray.push(value);
         }
+        
+        setMonths(newArray);
     }
 
     const submitForm = async (event) => {
@@ -86,8 +88,7 @@ function CreateForm() {
         
         await ref.set(data);
 
-        // toast.success('Post created!');
-        toast.success('Post created!');
+        toast.success('Success created!');
     }
 
     return (
@@ -124,25 +125,26 @@ function CreateForm() {
                     <Grid.Column>
                         <Form.Group grouped>
                             <label>Summer</label>
-                            <Form.Checkbox label="June" value={5} checked={months.includes(5)} onChange={changemonth} />
-                            <Form.Checkbox label="July" value={6} checked={months.includes(6)} onChange={changemonth} />
-                            <Form.Checkbox label="August" value={7} checked={months.includes(7)} onChange={changemonth} />
+                            <Form.Checkbox label="June" value={6} checked={months.includes(6)} onChange={changemonth} />
+                            <Form.Checkbox label="July" value={7} checked={months.includes(7)} onChange={changemonth} />
+                            <Form.Checkbox label="August" value={8} checked={months.includes(8)} onChange={changemonth} />
                         </Form.Group>
                     </Grid.Column>
                     <Grid.Column>
                         <Form.Group grouped>
                             <label>Fall</label>
-                            <Form.Checkbox label="September" value={5} checked={months.includes(5)} onChange={changemonth} />
-                            <Form.Checkbox label="October" value={6} checked={months.includes(6)} onChange={changemonth} />
-                            <Form.Checkbox label="November" value={7} checked={months.includes(7)} onChange={changemonth} />
+                            <Form.Checkbox label="September" value={9} checked={months.includes(9)} onChange={changemonth} />
+                            <Form.Checkbox label="October" value={10} checked={months.includes(10)} onChange={changemonth} />
+                            <Form.Checkbox label="November" value={11} checked={months.includes(11)} onChange={changemonth} />
                         </Form.Group>
                     </Grid.Column>
                 </Grid.Row>
+                <Grid.Row columns={1}>
+                    <Grid.Column>
+                        <Button type='submit' content='Submit' primary />
+                    </Grid.Column>
+                </Grid.Row>
             </Grid>
-
-
-
-            <Button type='submit'>Submit</Button>
         </Form>
     )
 }
