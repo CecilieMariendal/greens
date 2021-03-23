@@ -1,4 +1,4 @@
-import {Button, Grid, Form, List} from 'semantic-ui-react'
+import {Button, Icon, Grid, Form, List} from 'semantic-ui-react'
 import Head from 'next/head'
 import Link from 'next/link'
 import {useState} from 'react'
@@ -9,8 +9,8 @@ import {firestore, docToJson} from '@lib/firebase'
 
 
 export async function getServerSideProps() {
-    const query = firestore.collection('vegetables');
-    const ref = await query.get()
+    const query = firestore.collection('vegetables').orderBy('name');
+    const ref = await query.get();
     const vegetables = ref.docs.map(docToJson);
   
     return {
@@ -19,14 +19,27 @@ export async function getServerSideProps() {
 }
   
 
-export default function Admin({vegetables}) {
+export default function Admin(data) {
+    const [vegetables, setVegetables] = useState(data.vegetables);
+    
+    const deleteVegetable = (id, index) => {
+        firestore.collection('vegetables').doc(id).delete();
+        
+        const newVegetables = [...vegetables]
+        newVegetables.splice(index, 1);
 
-    const ListItem = vegetables.map((vegetable) => {
+        setVegetables(newVegetables);
+    } 
+
+    const ListItem = vegetables.map((vegetable, index) => {
         return (
             <List.Item key={vegetable.id}>
-                <Link href={`/admin/${vegetable.id}`}>
-                    {vegetable.name}
-                </Link>
+                <List.Icon name="delete" size="large" verticalAlign="middle" onClick={() => deleteVegetable(vegetable.id, index)}/>
+                <List.Content>
+                    <Link href={`/admin/${vegetable.id}`}>
+                        {vegetable.name}
+                    </Link>
+                </List.Content>
             </List.Item>
         )
     });
