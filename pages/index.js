@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import styles from '@styles/Home.module.css'
 
 export default function Home() {
@@ -22,13 +23,21 @@ export default function Home() {
   ];
 
   const date = new Date();
+  const currentMonth = data[date.getMonth()].split(',');
   
-  const list = monthNames.map((month, index) => {
+  
+  const list = currentMonth.map((item, index) => {
+
     return (
-      <>
-        <h2 className={(index === date.getMonth()) ? styles.active : ''}>{month}</h2>
-        <p>{data[index]}</p>
-      </>
+      <li key={index} className={styles.item}>
+        <Image 
+          src="/icon/cucumber.svg"
+          alt="Picture of the author"
+          width={100}
+          height={100}
+         />
+        <p>{item}</p>
+      </li>
     );
   });
 
@@ -49,6 +58,7 @@ export default function Home() {
       </main>
 
       <footer className={styles.footer}>
+        <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
       </footer>
     </div>
   )
