@@ -71,6 +71,7 @@ export default function Admin(data) {
 function CreateForm() {
     const [name, setName] = useState('');
     const [slug, setSlug] = useState('');
+    const [icon, setIcon] = useState('');
     const [months, setMonths] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 
     const changeName = (_, {value}) => {
@@ -93,11 +94,15 @@ function CreateForm() {
 
     const submitForm = async (event) => {
         event.preventDefault();
-        const uid = Math.random().toString(36).substring(2);
-        
-        const ref = firestore.collection('vegetables').doc(uid)
 
-        const data = {name, slug, months};
+        const uid = Math.random().toString(36).substring(2);
+        const ref = firestore.collection('vegetables').doc(uid)
+        const data = {
+            name,
+            slug,
+            icon,
+            months
+        };
         
         await ref.set(data);
 
@@ -114,6 +119,15 @@ function CreateForm() {
                             <label>Name</label>
                             <Form.Input placeholder='Name' value={name} onChange={changeName} />
                             <p>Slug: {slug}</p>
+                        </Form.Field>
+                    </Grid.Column>
+                </Grid.Row>
+
+                <Grid.Row columns={1}>
+                    <Grid.Column>
+                        <Form.Field>
+                            <label>Icon</label>
+                            <Form.Input placeholder='icon' value={icon} onChange={(_, {value}) => setIcon(value)}/>
                         </Form.Field>
                     </Grid.Column>
                 </Grid.Row>

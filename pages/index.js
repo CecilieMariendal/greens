@@ -1,42 +1,37 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '@styles/Home.module.css'
+import {firestore, docToJson} from '@lib/firebase';
 
-export default function Home() {
+
+export async function getServerSideProps() {
+  const date = new Date();
+
+  const query = firestore.collection('vegetables').where('months', 'array-contains', date.getMonth());
+  const ref = await query.get();
+  const vegetables = ref.docs.map(docToJson);
+
+  return {
+      props: {vegetables},
+  }
+}
+
+
+export default function Home({vegetables}) {
   const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
-
-  const data = [
-    "Grønkål, gulerødder, hvidkål, Jordskokker, kartofler, kinakål, løg, pastinakker, persillerod, porrer, rosenkål, rødbeder, rødkål, selleri",
-    "Grønkål, gulerødder, hvidkål, jordskokker, kartofler, løg, pastinakker, persillerod, porrer, rosenkål, rødbeder, rødkål, selleri",
-    "Agurk, feldsalat, grønkål, gulerødder, hvidkål, jordskokker, kartofler, løg, pastinakker, persillerod, porrer, purløg, rosenkål, rødbeder, rødkål, selleri, tomater, østershatte",
-    "Agurk, gulerødder, hvidkål, jordskokker, kartofler, løg, persille, porrer, rabarber, radiser, ramsløg, rosenkål, rødbeder, salat, selleri, spinat, tomater, østershatte",
-    "Agurk, forårsløg, persille, rabarber, radiser, salat, spinat, tomater",
-    "Agurk, asparges, bladbeder, blomkål, broccoli, gulerødder, jordbær, kartofler, kinakål, løg, persille, radiser, salat, spidskål, spinat, tomater, ærter",
-    "Agurk, bladbeder, blomkål, broccoli, bær, gulerødder, hindbær, jordbær, jordskokker, kartofler, kinakål, kirsebær, løg, persille, rabarber, radiser, salat, spidskål, squash, tomater, ærter",
-    "Agurk, asier, bladbeder, bladselleri, blomkål, blommer, broccoli, bær, bønner, gulerødder, hindbær, hvidkål, jordskokker, kartofler, kinakål, løg, majs, persille, porrer, pærer, rabarber, radiser, rødbeder, rødkål, salat, spidskål, spinat, squash, tomater, vindruer, æbler, ærter",
-    "Agurk, asier, bladbeder, bladselleri, blomkål, blommer, broccoli, bønner, grønkål, gulerødder, hvidkål, jordskokker, kartofler, kinakål, løg, majs, pastinakker, persille, persillerod, porrer, pærer, radiser, rosenkål, rødbeder, rødkål, salat, selleri, spinat, squash, tomater, vindruer, æbler",
-    "Agurk, asier, bladbeder, bladselleri, blomkål, broccoli, grønkål, gulerødder, hvidkål, jordskokker, kartofler, kinakål, løg, majs, pastinakker, persille, persillerod, porrer, pærer, radiser, rosenkål, rødbeder, rødkål, salat, selleri, spidskål, spinat, squash, tomater, valnødder, vindruer, æbler",
-    "Blomkål, græskar, grønkål, gulerødder, hvidkål, jordskokker, kartofler, kinakål, løg, pastinakker, persillerod, porrer, pærer, rosenkål, rødbeder, rødkål, salat, selleri, tomater, æbler",
-    "Blomkål, grønkål, gulerødder, hvidkål, jordskokker, kartofler, kinakål, løg, pastinakker, persillerod, porrer, pærer, rosenkål, rødbeder, rødkål, selleri, æbler", 
-  ];
-
-  const date = new Date();
-  const currentMonth = data[date.getMonth()].split(',');
   
-  
-  const list = currentMonth.map((item, index) => {
-
+  const list = vegetables.map((item, index) => {
     return (
       <li key={index} className={styles.item}>
         <Image 
-          src="/icon/cucumber.svg"
+          src={`/icon/${item.icon}.svg`}
           alt="Picture of the author"
           width={100}
           height={100}
          />
-        <p>{item}</p>
+        <p>{item.name}</p>
       </li>
     );
   });
@@ -59,6 +54,7 @@ export default function Home() {
 
       <footer className={styles.footer}>
         <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <div>Icons made by <a href="https://www.flaticon.com/authors/monkik" title="monkik">monkik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
       </footer>
     </div>
   )
