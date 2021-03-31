@@ -1,3 +1,7 @@
+:root {
+  --cloud-normal: lightgrey
+}
+
 html,
 body {
   padding: 0;
