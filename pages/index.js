@@ -18,9 +18,13 @@ export async function getServerSideProps() {
 
 
 export default function Home({vegetables}) {
-  const monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
+  const translation = require('../public/translations.json');
+  const language = 'dk';
+
+  const [month, setMonth] = useState(new Date().getMonth() + 1);
+  const [title, setTitle] = useState(translation[`${month}-title`][language]);
+
+  const description = translation[`${month}-description`][language];
   
   const list = vegetables.map((item, index) => {
     return (
@@ -44,8 +48,8 @@ export default function Home({vegetables}) {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>FRUGT & GRØNT I SÆSON</h1>
-        <p className={styles.description}>Se hvonår danske frugt og grønt er i sæson 🥦</p>
+          <h1 className={styles.title}>{title}</h1>
+        <p className={styles.description}>{description}</p>
 
         <ul className={styles.content}>
           {list}

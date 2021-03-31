@@ -1,0 +1,98 @@
+{
+    "1-title": {
+        "en": "January",
+        "dk": "Januar"
+    },
+    "1-description": {
+        "en": "Winder",
+        "dk": "Det er for groft"
+    },
+    "2-title": {
+        "en": "February",
+        "dk": "Februar"
+    },
+    "2-description": {
+        "en": "Winter",
+        "dk": "Det er for groft"
+    },
+    "3-title": {
+        "en": "March",
+        "dk": "Marts"
+    },
+    "3-description": {
+        "en": "Spring",
+        "dk": "Den spæde start"
+    },
+    "4-title": {
+        "en": "April",
+        "dk": "April"
+    },
+    "4-description": {
+        "en": "Spring",
+        "dk": "Den spæde start"
+    },
+    "5-title": {
+        "en": "May",
+        "dk": "Maj"
+    },
+    "5-description": {
+        "en": "New Harvest",
+        "dk": "Ny Høst"
+    },
+    "6-title": {
+        "en": "June",
+        "dk": "Juni"
+    },
+    "6-description": {
+        "en": "New Harvest",
+        "dk": "My Høst"
+    },
+    "7-title": {
+        "en": "July",
+        "dk": "Juli"
+    },
+    "7-description": {
+        "en": "My danish gardener",
+        "dk": "Min danske gartner"
+    },
+    "8-title": {
+        "en": "August",
+        "dk": "August"
+    },
+    "8-description": {
+        "en": "My danish gardener",
+        "dk": "Min danske gartner"
+    },
+    "9-title": {
+        "en": "September",
+        "dk": "September"
+    },
+    "9-description": {
+        "en": "We pick mushrooms and harvest fruit",
+        "dk": "Vi plukker svampe og høster frugt"
+    },
+    "10-title": {
+        "en": "October",
+        "dk": "Oktober"
+    },
+    "10-description": {
+        "en": "We pick mushrooms and harvest fruit",
+        "dk": "Vi plukker svampe og høster frugt"
+    },
+    "11-title": {
+        "en": "November",
+        "dk": "November"
+    },
+    "11-description": {
+      "en": "Here comes the kale",
+      "dk": "Der kommer kål"
+    },
+    "12-title": {
+        "en": "December",
+        "dk": "December"
+    },
+    "12-description": {
+        "en": "Here comes the kale",
+        "dk": "Der kommer kål"
+    }
+}
