@@ -9,47 +9,54 @@ import {useState} from 'react';
 export async function getServerSideProps() {
   const date = new Date();
 
-  const query = firestore.collection('vegetables').orderBy('name');
+  const query = firestore.collection('vegetables').where('months', 'array-contains', date.getMonth());
   const ref = await query.get();
-  const vegetables = ref.docs.map(docToJson);
+  const initVegetables = ref.docs.map(docToJson);
 
   return {
-      props: {vegetables},
+      props: {initVegetables},
   }
 }
 
 
-export default function Home({vegetables}) {
+export default function Home({initVegetables}) {
   const translation = require('../public/translations.json');
   const language = 'dk';
 
   const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [title, setTitle] = useState(translation[`${month}-title`][language]);
-
-  const description = translation[`${month}-description`][language];
+  const [description, setDescription] = useState(translation[`${month}-description`][language]);
+  const [vegetables, setVegetables] = useState(initVegetables);
   
-  const sortedVegetables = [];
-  for(let i = 1; i < 13; i++) {
-    sortedVegetables.push(vegetables.filter((item) => item.months.includes(i)));
+  const prevMonth = () => {
+    const newMonth = (month === 1) ? 12 : month - 1;
+
+    setMonth(newMonth);
+    updateNavbar(newMonth);
+    updateContent(newMonth);
   }
 
-  const monthLists = sortedVegetables.map((items, index) => {
-    return (
-      <ul className={(month === index + 1) ? styles.active : styles.hidden} key={index}>
-        <List vegetables={items}/>
-      </ul>
-    )
-  });
+  const nextMonth = () => {
+    const newMonth = (month === 12) ? 1 : month + 1;
+
+    setMonth(newMonth);
+    updateNavbar(newMonth);
+    updateContent(newMonth);
+  }
 
 
-  const onNavbarClick = (direction) => {
-    if (direction === 'next') {
-      setMonth(month + 1);
-    } else {
-      setMonth(month - 1);
-    }
+  function updateNavbar(newMonth) {
+    setTitle(translation[`${newMonth}-title`][language]);
+    setDescription(translation[`${newMonth}-description`][language]);
+  }
+
+
+  async function updateContent(newMonth) {
+    const query = firestore.collection('vegetables').where('months', 'array-contains', newMonth);
+    const ref = await query.get();
+    const vegetables = ref.docs.map(docToJson);
     
-    setTitle(translation[`${month}-title`][language]);
+    setVegetables(vegetables);
   }
 
 
@@ -62,20 +69,18 @@ export default function Home({vegetables}) {
 
       <main className={styles.main}>
         <nav className={styles.navbar}>
-          <button onClick={() => onNavbarClick('prev')}>
+          <button onClick={prevMonth}>
             <Icon name='chevron left' size='large'color='grey' />
           </button>
           <h1 className={styles.title}>{title}</h1>
-          <button onClick={() => onNavbarClick('next')}>          
+          <button onClick={nextMonth}>          
             <Icon name='chevron right' size='large' color='grey'/>
           </button>
         </nav>
         <p className={styles.description}>{description}</p>
 
         <div className={styles.content}>
-          <div>
-            {monthLists}
-          </div>
+          <List vegetables={vegetables}/>
         </div>
       </main>
 
@@ -88,7 +93,7 @@ export default function Home({vegetables}) {
 
 
 function List({vegetables}) {
-  const list = vegetables.map((item, index) => {
+  const items = vegetables.map((item, index) => {
     return (
       <li key={index} className={styles.item}>
         <Image 
@@ -96,11 +101,15 @@ function List({vegetables}) {
           alt="Picture of the author"
           width={100}
           height={100}
-         />
+        />
         <p>{item.name}</p>
       </li>
-    );
-  });
+    )
+  })
 
-  return list;
+  return (
+    <ul>
+      {items}
+    </ul>
+  );
 }
