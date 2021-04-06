@@ -7,11 +7,14 @@ import {useState} from 'react';
 
 
 export async function getServerSideProps() {
-  const date = new Date();
-
-  const query = firestore.collection('vegetables').where('months', 'array-contains', date.getMonth());
+  const query = firestore.collection('vegetables').orderBy('name');
   const ref = await query.get();
-  const initVegetables = ref.docs.map(docToJson);
+  const vegetables = ref.docs.map(docToJson);
+
+  const initVegetables = [];
+  for(let i = 1; i <= 12; i++) {
+    initVegetables.push(vegetables.filter((vegetable) => vegetable.months.includes(i)));
+  }
 
   return {
       props: {initVegetables},
@@ -23,10 +26,12 @@ export default function Home({initVegetables}) {
   const translation = require('../public/translations.json');
   const language = 'dk';
 
-  const [month, setMonth] = useState(new Date().getMonth() + 1);
+  const currentMonth = new Date().getMonth() + 1;
+
+  const [month, setMonth] = useState(currentMonth);
   const [title, setTitle] = useState(translation[`${month}-title`][language]);
   const [description, setDescription] = useState(translation[`${month}-description`][language]);
-  const [vegetables, setVegetables] = useState(initVegetables);
+  const [vegetables, setVegetables] = useState(initVegetables[currentMonth]);
   
   const prevMonth = () => {
     const newMonth = (month === 1) ? 12 : month - 1;
@@ -52,11 +57,7 @@ export default function Home({initVegetables}) {
 
 
   async function updateContent(newMonth) {
-    const query = firestore.collection('vegetables').where('months', 'array-contains', newMonth);
-    const ref = await query.get();
-    const vegetables = ref.docs.map(docToJson);
-    
-    setVegetables(vegetables);
+    setVegetables(initVegetables[newMonth]);
   }
 
 
@@ -68,20 +69,22 @@ export default function Home({initVegetables}) {
       </Head>
 
       <main className={styles.main}>
-        <nav className={styles.navbar}>
-          <button onClick={prevMonth}>
-            <Icon name='chevron left' size='large'color='grey' />
-          </button>
-          <h1 className={styles.title}>{title}</h1>
-          <button onClick={nextMonth}>          
-            <Icon name='chevron right' size='large' color='grey'/>
-          </button>
-        </nav>
-        <p className={styles.description}>{description}</p>
+        <section>
+          <nav className={styles.navbar}>
+            <button onClick={prevMonth}>
+              <Icon name='chevron left' size='large'color='grey' />
+            </button>
+            <h1 className={styles.title}>{title}</h1>
+            <button onClick={nextMonth}>          
+              <Icon name='chevron right' size='large' color='grey'/>
+            </button>
+          </nav>
+          <p className={styles.description}>{description}</p>
 
-        <div className={styles.content}>
-          <List vegetables={vegetables}/>
-        </div>
+          <div className={styles.content}>
+            <List vegetables={vegetables}/>
+          </div>
+        </section>
       </main>
 
       <footer className={styles.footer}>
