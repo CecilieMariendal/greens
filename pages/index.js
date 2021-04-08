@@ -31,7 +31,7 @@ export default function Home({initVegetables}) {
   const [month, setMonth] = useState(currentMonth);
   const [title, setTitle] = useState(translation[`${month}-title`][language]);
   const [description, setDescription] = useState(translation[`${month}-description`][language]);
-  const [vegetables, setVegetables] = useState(initVegetables[currentMonth]);
+  const [vegetables, setVegetables] = useState(initVegetables[currentMonth - 1]);
   
   const prevMonth = () => {
     const newMonth = (month === 1) ? 12 : month - 1;
@@ -57,7 +57,7 @@ export default function Home({initVegetables}) {
 
 
   async function updateContent(newMonth) {
-    setVegetables(initVegetables[newMonth]);
+    setVegetables(initVegetables[newMonth - 1]);
   }
 
 
@@ -100,7 +100,7 @@ function List({vegetables}) {
     return (
       <li key={index} className={styles.item}>
         <Image 
-          src={`/icon/${item.icon ?? 'vegetables'}.svg`}
+        src={`/icon/${item.icon || 'vegetables'}.svg`}
           alt="Picture of the author"
           width={100}
           height={100}
