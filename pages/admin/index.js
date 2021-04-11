@@ -1,4 +1,4 @@
-import {Button, Icon, Grid, Form, List} from 'semantic-ui-react'
+import {Button, Grid, Form, List} from 'semantic-ui-react'
 import Head from 'next/head'
 import Link from 'next/link'
 import {useState} from 'react'
@@ -22,6 +22,7 @@ export async function getServerSideProps() {
 export default function Admin(data) {
     const [vegetables, setVegetables] = useState(data.vegetables);
     
+
     const deleteVegetable = (id, index) => {
         firestore.collection('vegetables').doc(id).delete();
         
@@ -31,10 +32,13 @@ export default function Admin(data) {
         setVegetables(newVegetables);
     } 
 
+
     const ListItem = vegetables.map((vegetable, index) => {
         return (
             <List.Item key={vegetable.id}>
-                <List.Icon name="delete" size="large" verticalAlign="middle" onClick={() => deleteVegetable(vegetable.id, index)}/>
+                <button onClick={() => deleteVegetable(vegetable.id, index)}>X</button>
+                
+                <List.Icon name="delete" size="large" verticalAlign="middle" />
                 <List.Content>
                     <Link href={`/admin/${vegetable.id}`}>
                         {vegetable.name}
@@ -51,15 +55,21 @@ export default function Admin(data) {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <h1>Admin</h1>
+            
+            <div>
+                <CreateForm/>
+                
+                <div>
+                    <h2>List</h2>
+                    {ListItem}
+                </div>
+            </div>
             <Grid>
                 <Grid.Row columns={2}>
                     <Grid.Column>
-                        <CreateForm/>
                     </Grid.Column>
                     <Grid.Column>
-                        <List floated="right" divided>
-                            {ListItem}
-                        </List>
+                        
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
@@ -97,12 +107,7 @@ function CreateForm() {
 
         const uid = Math.random().toString(36).substring(2);
         const ref = firestore.collection('vegetables').doc(uid)
-        const data = {
-            name,
-            slug,
-            icon,
-            months
-        };
+        const data = {name, slug, icon, months};
         
         await ref.set(data);
 
