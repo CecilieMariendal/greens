@@ -1,0 +1,29 @@
+.container {
+    min-height: 100vh;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fieldset {
+    display: flex;
+}
+
+
+.fieldset div {
+    padding: 0.5rem 1rem;
+}
+
+.fieldset label {
+    display: block;
+}
+
+.inputField {
+    display: flex;
+    flex-direction: column;
+    margin: 0.25rem 0 1rem;
+    padding: 0.25rem;
+    border-color: grey;
+}

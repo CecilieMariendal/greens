@@ -1,9 +1,8 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import {useState} from 'react'
-import toast from 'react-hot-toast';
-import kebabCase from 'lodash.kebabcase';
-import styles from '@styles/Admin.module.css'
+import toast from 'react-hot-toast'
+import kebabCase from 'lodash.kebabcase'
+import styles from '@styles/Edit.module.css'
 import {firestore, docToJson} from '@lib/firebase'
 
 
@@ -83,35 +82,49 @@ export default function Create(data) {
                 <fieldset>
                     <legend>General</legend>
                     
-                    <label htmlFor="name">Name</label>
-                    <input type="text" name="name" value={name} onChange={changeName}/>
+                    <label htmlFor="name" className={styles.inputField}>
+                        Name
+                        <input type="text" name="name" value={name} onChange={changeName}/>
+                        <span></span>
+                    </label>
 
-                    <label htmlFor="icon">icon</label>
-                    <input type="file" name="icon" onChange={changeIcon}/>
+                    <label htmlFor="icon" className={styles.inputField}>
+                        Icon
+                        <input type="file" name="icon" onChange={changeIcon}/>
+                        <span></span>
+                    </label>
                 </fieldset>
 
-                <fieldset>
+                <fieldset className={styles.fieldset}>
                     <legend>Months</legend>
 
-                    <h3>Winter</h3>
-                    <label className={styles.checkbox}>December <input type="checkbox" value="12" checked={months.includes(12)} onChange={changemonth}/></label>
-                    <label className={styles.checkbox}>January <input type="checkbox" value="1" checked={months.includes(1)} onChange={changemonth}/></label>
-                    <label className={styles.checkbox}>February <input type="checkbox" value="2" checked={months.includes(2)} onChange={changemonth}/></label>
+                    <div>
+                        <h3>Winter</h3>
+                        <label>December <input type="checkbox" value="12" checked={months.includes(12)} onChange={changemonth}/></label>
+                        <label>January <input type="checkbox" value="1" checked={months.includes(1)} onChange={changemonth}/></label>
+                        <label>February <input type="checkbox" value="2" checked={months.includes(2)} onChange={changemonth}/></label>
+                    </div>
                     
-                    <h3>Spring</h3>
-                    <label className={styles.checkbox}>March <input type="checkbox" value="3" checked={months.includes(3)} onChange={changemonth}/></label>
-                    <label className={styles.checkbox}>April <input type="checkbox" value="4" checked={months.includes(4)} onChange={changemonth}/></label>
-                    <label className={styles.checkbox}>May <input type="checkbox" value="5" checked={months.includes(5)} onChange={changemonth}/></label>
+                    <div>
+                        <h3>Spring</h3>
+                        <label >March <input type="checkbox" value="3" checked={months.includes(3)} onChange={changemonth}/></label>
+                        <label>April <input type="checkbox" value="4" checked={months.includes(4)} onChange={changemonth}/></label>
+                        <label>May <input type="checkbox" value="5" checked={months.includes(5)} onChange={changemonth}/></label>
+                    </div>
                     
-                    <h3>Summer</h3>
-                    <label className={styles.checkbox}>June <input type="checkbox" value="6" checked={months.includes(6)} onChange={changemonth}/></label>
-                    <label className={styles.checkbox}>July <input type="checkbox" value="7" checked={months.includes(7)} onChange={changemonth}/></label>
-                    <label className={styles.checkbox}>August <input type="checkbox" value="8" checked={months.includes(8)} onChange={changemonth}/></label>
+                    <div>
+                        <h3>Summer</h3>
+                        <label>June <input type="checkbox" value="6" checked={months.includes(6)} onChange={changemonth}/></label>
+                        <label>July <input type="checkbox" value="7" checked={months.includes(7)} onChange={changemonth}/></label>
+                        <label>August <input type="checkbox" value="8" checked={months.includes(8)} onChange={changemonth}/></label>
+                    </div>
                     
-                    <h3>Fall</h3>
-                    <label className={styles.checkbox}>September <input type="checkbox" value="9" checked={months.includes(9)} onChange={changemonth}/></label>
-                    <label className={styles.checkbox}>October <input type="checkbox" value="10" checked={months.includes(10)} onChange={changemonth}/></label>
-                    <label className={styles.checkbox}>November <input type="checkbox" value="11" checked={months.includes(11)} onChange={changemonth}/></label>
+                    <div>
+                        <h3>Fall</h3>
+                        <label>October <input type="checkbox" value="10" checked={months.includes(10)} onChange={changemonth}/></label>
+                        <label>September <input type="checkbox" value="9" checked={months.includes(9)} onChange={changemonth}/></label>
+                        <label>November <input type="checkbox" value="11" checked={months.includes(11)} onChange={changemonth}/></label>
+                    </div>
                 </fieldset>
 
                 <button type="submit">Submit</button>
