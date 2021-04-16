@@ -83,13 +83,13 @@ export default function Create(data) {
                     <legend>General</legend>
                     
                     <label htmlFor="name" className={styles.inputField}>
-                        Name
+                        <h4>Name</h4>
                         <input type="text" name="name" value={name} onChange={changeName}/>
                         <span></span>
                     </label>
 
                     <label htmlFor="icon" className={styles.inputField}>
-                        Icon
+                        <h4>Icon</h4>
                         <input type="file" name="icon" onChange={changeIcon}/>
                         <span></span>
                     </label>
@@ -100,34 +100,43 @@ export default function Create(data) {
 
                     <div>
                         <h3>Winter</h3>
-                        <label>December <input type="checkbox" value="12" checked={months.includes(12)} onChange={changemonth}/></label>
-                        <label>January <input type="checkbox" value="1" checked={months.includes(1)} onChange={changemonth}/></label>
-                        <label>February <input type="checkbox" value="2" checked={months.includes(2)} onChange={changemonth}/></label>
+                        <label><input type="checkbox" value="12" checked={months.includes(12)} onChange={changemonth}/>December</label>
+                        <label><input type="checkbox" value="1" checked={months.includes(1)} onChange={changemonth}/>January</label>
+                        <label><input type="checkbox" value="2" checked={months.includes(2)} onChange={changemonth}/>February</label>
                     </div>
                     
                     <div>
                         <h3>Spring</h3>
-                        <label >March <input type="checkbox" value="3" checked={months.includes(3)} onChange={changemonth}/></label>
-                        <label>April <input type="checkbox" value="4" checked={months.includes(4)} onChange={changemonth}/></label>
-                        <label>May <input type="checkbox" value="5" checked={months.includes(5)} onChange={changemonth}/></label>
+                        <label><input type="checkbox" value="3" checked={months.includes(3)} onChange={changemonth}/>March</label>
+                        <label><input type="checkbox" value="4" checked={months.includes(4)} onChange={changemonth}/>April</label>
+                        <label><input type="checkbox" value="5" checked={months.includes(5)} onChange={changemonth}/>May</label>
                     </div>
                     
                     <div>
                         <h3>Summer</h3>
-                        <label>June <input type="checkbox" value="6" checked={months.includes(6)} onChange={changemonth}/></label>
-                        <label>July <input type="checkbox" value="7" checked={months.includes(7)} onChange={changemonth}/></label>
-                        <label>August <input type="checkbox" value="8" checked={months.includes(8)} onChange={changemonth}/></label>
+                        <label><input type="checkbox" value="6" checked={months.includes(6)} onChange={changemonth}/>June</label>
+                        <label><input type="checkbox" value="7" checked={months.includes(7)} onChange={changemonth}/>July</label>
+                        <label><input type="checkbox" value="8" checked={months.includes(8)} onChange={changemonth}/>August</label>
                     </div>
                     
                     <div>
                         <h3>Fall</h3>
-                        <label>October <input type="checkbox" value="10" checked={months.includes(10)} onChange={changemonth}/></label>
-                        <label>September <input type="checkbox" value="9" checked={months.includes(9)} onChange={changemonth}/></label>
-                        <label>November <input type="checkbox" value="11" checked={months.includes(11)} onChange={changemonth}/></label>
+                        <label><input type="checkbox" value="10" checked={months.includes(10)} onChange={changemonth}/>October</label>
+                        <label><input type="checkbox" value="9" checked={months.includes(9)} onChange={changemonth}/>September</label>
+                        <label><input type="checkbox" value="11" checked={months.includes(11)} onChange={changemonth}/>November</label>
                     </div>
                 </fieldset>
 
-                <button type="submit">Submit</button>
+                <fieldset>
+                    <legend>Parent</legend>
+                    <label htmlFor="parent" className={styles.inputField}>
+                        <h4>Parent items</h4>
+                        <input type="text"/>
+                    </label>
+                    <ul></ul>
+                </fieldset>
+
+                <button className={styles.submit} type="submit">Submit</button>
             </form>
             
             <div>
